@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# WhistleBlower Frontend
 
-## Getting Started
+This is the frontend for the WhistleBlower project, located in the `next-frontend` directory. This project is built with Next.js and integrates Aptos Wallet and Google OAuth for authentication.
 
-First, run the development server:
+## Usage
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Clone the Repository
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Open your terminal.
+2. Clone the repository:
+   ```sh
+   git clone https://github.com/yourusername/whistleblower.git
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Navigate to Frontend Directory
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. Navigate to the frontend directory:
+   ```sh
+   cd whistleblower/next-frontend
+   ```
 
-## Learn More
+### Install Dependencies
 
-To learn more about Next.js, take a look at the following resources:
+4. Install the necessary packages:
+   ```sh
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Start the Development Server
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+5. Start the Next.js development server:
+   ```sh
+   npm run dev
+   ```
 
-## Deploy on Vercel
+6. Open your browser and navigate to `http://localhost:3000`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Explanation
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Project Overview
+
+The WhistleBlower project is designed to allow users to securely upload PDF files, specify email recipients, and manage access through wallet and email authentication. The frontend is built with Next.js, utilizing Radix UI for component styling and Axios for API requests. The authentication is handled by integrating Aptos Wallet for blockchain interactions and Google OAuth for verifying user identities.
+
+### Key Functionalities
+
+1. **Wallet Connection**: Users can connect their Aptos wallet using the wallet selector component.
+2. **PDF Upload**: Users can upload a PDF file and specify the recipient's email.
+3. **Link Generation**: A unique link with a token is generated for the uploaded PDF and sent to the specified email.
+4. **Email Verification**: The recipient can access the link, log in with Google OAuth, and the system verifies their email against the specified email.
+5. **PDF Access**: If the email is verified, the recipient can view or download the PDF.
+
+### User Flow
+
+1. **Upload**: The user connects their wallet, uploads a PDF, specifies the recipient's email, and submits the form.
+2. **Email**: The backend processes the request, stores the information, and sends an email with a unique link to the recipient.
+3. **Verification**: The recipient clicks the link, logs in with Google, and the system verifies their email.
+4. **Access**: Upon successful verification, the recipient can view or download the PDF.
+
+### Technologies Used
+
+- **Next.js**: Framework for building the React application.
+- **Radix UI**: Library for accessible and customizable UI components.
+- **Axios**: HTTP client for making API requests.
+- **Aptos Wallet**: Integration for blockchain interactions.
+- **Google OAuth**: Authentication for verifying user identities.
+
+---
+
+For any issues or contributions, please refer to the [GitHub repository](https://github.com/arfiligol/whistleblower).
