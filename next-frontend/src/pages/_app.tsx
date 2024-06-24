@@ -15,7 +15,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         onError={(error) => console.log("Custom error handling", error)}
       >
         <QueryClientProvider client={queryClient}>
-          <Header />
           <Component {...pageProps} />
         </QueryClientProvider>
       </AptosWalletAdapterProvider>
