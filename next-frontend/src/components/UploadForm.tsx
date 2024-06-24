@@ -2,11 +2,16 @@ import React, { useState, useEffect } from 'react';
 import axios, { AxiosError } from 'axios';
 import { useWallet } from '@aptos-labs/wallet-adapter-react';
 import { v4 as uuidv4 } from 'uuid';
+import { encryptFile } from '../utils/encryption';
+import { uploadToIPFS } from '../utils/upload_to_ipfs';
+// import { sendToSmartContract } from '../utils/smartContract'; // 預留
 
 const UploadForm: React.FC = () => {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [email, setEmail] = useState('');
   const [walletAddress, setWalletAddress] = useState('');
+  const [secretKey, setSecretKey] = useState<string | null>(null);
+  const [cid, setCid] = useState<string | null>(null);
   const { account } = useWallet();
 
   useEffect(() => {
@@ -40,48 +45,17 @@ const UploadForm: React.FC = () => {
       return;
     }
 
-    const token = uuidv4(); // 生成唯一的 token
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-    const link = `${baseUrl}/verify?token=${token}`;
-    const formData = new FormData();
-    formData.append('pdfFile', pdfFile);
-    formData.append('email', email);
-    formData.append('walletAddress', walletAddress);
-    formData.append('token', token); // 將 token 添加到表單數據中
-    formData.append('link', link); // 將 link 添加到表單數據中
-
-    const PYTHON_BACKEND_API_URL = process.env.NEXT_PUBLIC_PYTHON_BACKEND_API_URL;
-    if (!PYTHON_BACKEND_API_URL) {
-      alert("請聯繫開發人員，尚未指定後端 Python API 的 Base URL!");
-      return;
-    }
-
     try {
-      const response = await axios.post(`${PYTHON_BACKEND_API_URL}/upload`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }); // 調用後端 API
-      alert('File uploaded and email sent successfully');
+      const secretKey = uuidv4();
+      setSecretKey(secretKey);
+      const encryptedFile = await encryptFile(pdfFile, secretKey);
+      const cid = await uploadToIPFS(encryptedFile);
+      setCid(cid);
+      // await sendToSmartContract(cid, secretKey, walletAddress); // 預留
+      alert(`File uploaded successfully. Decryption Key: ${secretKey}, CID: ${cid}`);
     } catch (error) {
-      let errorMessage = 'An unknown error occurred';
-
-      if (axios.isAxiosError(error)) {
-        if (error.response) {
-          // 伺服器響應的錯誤
-          errorMessage = error.response.data?.details || error.response.statusText;
-        } else if (error.request) {
-          // 請求發送失敗，伺服器未響應
-          errorMessage = 'No response received from backend server';
-        } else {
-          // 其他錯誤
-          errorMessage = error.message;
-        }
-      } else if (error instanceof Error) {
-        errorMessage = error.message;
-      }
-
-      alert(errorMessage);
+      console.error('Error during upload:', error);
+      alert('An error occurred');
     }
   };
 
@@ -118,6 +92,18 @@ const UploadForm: React.FC = () => {
           Submit
         </button>
       </form>
+      {secretKey && (
+        <div className="mt-4 p-4 bg-gray-100 rounded-md">
+          <h3 className="text-lg font-semibold">Decryption Key:</h3>
+          <p>{secretKey}</p>
+        </div>
+      )}
+      {cid && (
+        <div className="mt-4 p-4 bg-gray-100 rounded-md">
+          <h3 className="text-lg font-semibold">IPFS CID:</h3>
+          <p>{cid}</p>
+        </div>
+      )}
     </div>
   );
 };
