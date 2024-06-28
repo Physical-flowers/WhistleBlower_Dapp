@@ -1,0 +1,28 @@
+[package]
+name = "stablecoin"
+version = "0.0.0"
+
+[addresses]
+stablecoin = "95ff3d626f4b282b4c98e8d6eef1150681bce6f10ec15007f84ad43c54d2461c"
+master_minter = "0x848aa32c48d78e55928ba2a6c3806f8b3d3896a4bb6e84c196d9a38f4036f0f9"
+minter = "0x848aa32c48d78e55928ba2a6c3806f8b3d3896a4bb6e84c196d9a38f4036f0f9"
+denylister = "0x848aa32c48d78e55928ba2a6c3806f8b3d3896a4bb6e84c196d9a38f4036f0f9"
+pauser = "0x848aa32c48d78e55928ba2a6c3806f8b3d3896a4bb6e84c196d9a38f4036f0f9"
+
+#stablecoin = "0xcafe"
+#master_minter = "0xbab"
+#minter = "0xface"
+#pauser = "0xdafe"
+#denylister = "0xcade"
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-core.git"
+rev = "mainnet"
+subdir = "aptos-move/framework/aptos-framework"
+
+#[addresses]
+#stablecoin = "95ff3d626f4b282b4c98e8d6eef1150681bce6f10ec15007f84ad43c54d2461c"
+#master_minter = "0x848aa32c48d78e55928ba2a6c3806f8b3d3896a4bb6e84c196d9a38f4036f0f9"
+#minter = "0x848aa32c48d78e55928ba2a6c3806f8b3d3896a4bb6e84c196d9a38f4036f0f9"
+#denylister = "0x848aa32c48d78e55928ba2a6c3806f8b3d3896a4bb6e84c196d9a38f4036f0f9"
+#pauser = "0x848aa32c48d78e55928ba2a6c3806f8b3d3896a4bb6e84c196d9a38f4036f0f9"
