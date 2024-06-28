@@ -1,0 +1,1 @@
+# This is only for us to test how to call the contract
