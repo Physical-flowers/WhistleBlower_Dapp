@@ -23,7 +23,8 @@ export function WalletSelector() {
     try {
       await navigator.clipboard.writeText(account.address);
       alert('Copied wallet address to clipboard.');
-    } catch {
+    } catch (err) {
+      console.error(err);
       alert('Failed to copy wallet address.');
     }
   }, [account?.address]);
