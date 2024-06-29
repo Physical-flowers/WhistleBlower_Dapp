@@ -1,5 +1,5 @@
 // contract/actions/getContractAddress.ts
-import { ABI } from "../abi/abi";
+import { ABI } from "../../abi/abi";
 
 export function getContractAddress(): string {
   const contractAddress = ABI.address;

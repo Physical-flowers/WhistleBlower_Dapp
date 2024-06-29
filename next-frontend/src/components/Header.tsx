@@ -2,8 +2,13 @@
 import React from 'react';
 import { WalletSelector } from "./WalletSelector";
 import { TransferTokenButton } from './TransferTokenButton';
+import GmailLoginWalletButton from './GmailLoginWalletButton';
 
 export function Header({ toggleSidebar }: { toggleSidebar: () => void }) {
+  const handleLoginSuccess = (walletAddress: string) => {
+    console.log('Logged in with wallet address:', walletAddress);
+  };
+
   return (
     <header className="w-full bg-white p-4 shadow-md flex justify-between items-center transition-transform duration-300">
       <div className="flex items-center">
@@ -23,7 +28,8 @@ export function Header({ toggleSidebar }: { toggleSidebar: () => void }) {
       <div className="flex-1"></div>
       <div className="flex-shrink-0 flex gap-4">
         <TransferTokenButton />
-        <WalletSelector />
+        {/* <WalletSelector /> */}
+        <GmailLoginWalletButton onLoginSuccess={handleLoginSuccess} />
       </div>
     </header>
   );

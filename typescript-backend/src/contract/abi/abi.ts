@@ -1,1 +1,34 @@
-export const ABI = {"address":"0x4422cae46aea5e7654b84f3e81a4013a4767113c3addc8be7cf8e55ef1eb2321","name":"usdk","friends":[],"exposed_functions":[{"name":"add_minter","visibility":"public","is_entry":true,"is_view":false,"generic_type_params":[],"params":["&signer","address"],"return":[]},{"name":"burn","visibility":"public","is_entry":true,"is_view":false,"generic_type_params":[],"params":["&signer","address","u64"],"return":[]},{"name":"burn_from","visibility":"public","is_entry":true,"is_view":false,"generic_type_params":[],"params":["&signer","0x1::object::Object<0x1::fungible_asset::FungibleStore>","u64"],"return":[]},{"name":"denylist","visibility":"public","is_entry":true,"is_view":false,"generic_type_params":[],"params":["&signer","address"],"return":[]},{"name":"deposit","visibility":"public","is_entry":false,"is_view":false,"generic_type_params":[{"constraints":["key"]}],"params":["0x1::object::Object<T0>","0x1::fungible_asset::FungibleAsset","&0x1::fungible_asset::TransferRef"],"return":[]},{"name":"metadata","visibility":"public","is_entry":false,"is_view":true,"generic_type_params":[],"params":[],"return":["0x1::object::Object<0x1::fungible_asset::Metadata>"]},{"name":"mint","visibility":"public","is_entry":true,"is_view":false,"generic_type_params":[],"params":["&signer","address","u64"],"return":[]},{"name":"set_pause","visibility":"public","is_entry":true,"is_view":false,"generic_type_params":[],"params":["&signer","bool"],"return":[]},{"name":"transfer","visibility":"public","is_entry":true,"is_view":false,"generic_type_params":[],"params":["&signer","address","u64"],"return":[]},{"name":"transfer_from","visibility":"public","is_entry":false,"is_view":false,"generic_type_params":[],"params":["&signer","vector<u8>","address","u8","vector<u8>","address","u64"],"return":[]},{"name":"undenylist","visibility":"public","is_entry":true,"is_view":false,"generic_type_params":[],"params":["&signer","address"],"return":[]},{"name":"usdk_address","visibility":"public","is_entry":false,"is_view":true,"generic_type_params":[],"params":[],"return":["address"]},{"name":"withdraw","visibility":"public","is_entry":false,"is_view":false,"generic_type_params":[{"constraints":["key"]}],"params":["0x1::object::Object<T0>","u64","&0x1::fungible_asset::TransferRef"],"return":["0x1::fungible_asset::FungibleAsset"]}],"structs":[{"name":"Approval","is_native":false,"abilities":["drop"],"generic_type_params":[],"fields":[{"name":"owner","type":"address"},{"name":"to","type":"address"},{"name":"nonce","type":"u64"},{"name":"chain_id","type":"u8"},{"name":"spender","type":"address"},{"name":"amount","type":"u64"}]},{"name":"Burn","is_native":false,"abilities":["drop","store"],"generic_type_params":[],"fields":[{"name":"minter","type":"address"},{"name":"from","type":"address"},{"name":"store","type":"0x1::object::Object<0x1::fungible_asset::FungibleStore>"},{"name":"amount","type":"u64"}]},{"name":"Denylist","is_native":false,"abilities":["drop","store"],"generic_type_params":[],"fields":[{"name":"denylister","type":"address"},{"name":"account","type":"address"}]},{"name":"Management","is_native":false,"abilities":["key"],"generic_type_params":[],"fields":[{"name":"extend_ref","type":"0x1::object::ExtendRef"},{"name":"mint_ref","type":"0x1::fungible_asset::MintRef"},{"name":"burn_ref","type":"0x1::fungible_asset::BurnRef"},{"name":"transfer_ref","type":"0x1::fungible_asset::TransferRef"}]},{"name":"Mint","is_native":false,"abilities":["drop","store"],"generic_type_params":[],"fields":[{"name":"minter","type":"address"},{"name":"to","type":"address"},{"name":"amount","type":"u64"}]},{"name":"Pause","is_native":false,"abilities":["drop","store"],"generic_type_params":[],"fields":[{"name":"pauser","type":"address"},{"name":"is_paused","type":"bool"}]},{"name":"Roles","is_native":false,"abilities":["key"],"generic_type_params":[],"fields":[{"name":"master_minter","type":"address"},{"name":"minters","type":"vector<address>"},{"name":"pauser","type":"address"},{"name":"denylister","type":"address"}]},{"name":"State","is_native":false,"abilities":["key"],"generic_type_params":[],"fields":[{"name":"paused","type":"bool"}]}]} as const
+export const ABI = {
+  address: "0x575ef47f4791eef3da85455b8c988a32f047b43ba5407df52c559bcad2f5cda",
+  name: "create_nft",
+  friends: [],
+  exposed_functions: [
+    {
+      name: "delayed_mint_event_ticket",
+      visibility: "public",
+      is_entry: true,
+      is_view: false,
+      generic_type_params: [],
+      params: [
+        "&signer",
+        "&signer",
+        "vector<0x1::string::String>",
+        "vector<0x1::string::String>",
+      ],
+      return: [],
+    },
+  ],
+  structs: [
+    {
+      name: "ModuleData",
+      is_native: false,
+      abilities: ["key"],
+      generic_type_params: [],
+      fields: [
+        { name: "token_data_id", type: "0x3::token::TokenDataId" },
+        { name: "cid", type: "vector<0x1::string::String>" },
+        { name: "key", type: "vector<0x1::string::String>" },
+      ],
+    },
+  ],
+} as const;
