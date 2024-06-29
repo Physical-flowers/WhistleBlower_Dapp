@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 10px 10px 0 0;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .content {
+            padding: 20px;
+        }
+        .content h2 {
+            color: #333;
+        }
+        .content p {
+            color: #666;
+        }
+        .content a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .content a:hover {
+            text-decoration: underline;
+        }
+        .footer {
+            background: #007BFF;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            border-radius: 0 0 10px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>來自 WhistleBlower 應用程式的重要通知</h1>
+        </div>
+        <div class="content">
+            <p>您好，</p>
+            <p>這封信來自 WhistleBlower 應用程式。WhistleBlower 是一個匿名舉報平台，旨在保護舉報人的隱私並鼓勵揭露不法行為。</p>
+            
+            <h2>為什麼會收到這封信？</h2>
+            <p>因為有人向您們匿名舉報一些資料，並且抵押部分金額 {{ deposit_amount }} 作爲保證。</p>
+            
+            <h2>主管機關可以怎麼協助？</h2>
+            <p>點擊以下連結會將您跳轉到 WhistleBlower 應用程式。無須註冊，只需要您登入您的 Gmail 讓我們認證您是否為指定的主管機關對象。</p>
+            <p>當我們檢測到您是正確的主管機關時，會讓您能夠看到舉報的相關資料（PDF 檔案）。</p>
+            <p><a href="{{ url }}">點擊這裡查看舉報資料</a></p>
+            
+            <h2>技術說明</h2>
+            <p>我們使用 Keyless 或 OAuth 技術來確保您的帳號安全。我們無法獲取您的帳號信息。詳細了解請參閱 Google 官方的 <a href="https://cloud.google.com/apigee/docs/api-platform/security/oauth/oauth-introduction">技術說明</a>。</p>
+            
+            <h2>如何處理匿名舉報？</h2>
+            <p>您可以審核或調查這件事。若認為舉報對象舉報有功，可以透過 Transfer Token 的形式給予對方一些獎金，讓對方知道自己的舉報是有用的。</p>
+            
+            <h2>結語</h2>
+            <p>感謝您的協助，讓我們共創美好未來。</p>
+            
+            <p>此致，</p>
+            <p>WhistleBlower 團隊</p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2024 WhistleBlower 應用程式. All Rights Reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
