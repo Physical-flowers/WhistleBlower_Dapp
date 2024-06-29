@@ -1,9 +1,8 @@
 // components/TransferDialog.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
-import { useWallet } from '@aptos-labs/wallet-adapter-react'; 
 import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
-
+import { usePhysicsFlowerWallet } from '@/context/PhysicsFlowerWalletContext';
 
 interface TransferDialogProps {
   isOpen: boolean;
@@ -11,23 +10,12 @@ interface TransferDialogProps {
 }
 
 export function TransferDialog({ isOpen, onClose }: TransferDialogProps) {
-  const { account, connected, signAndSubmitTransaction, changeNetwork } = useWallet();
+  const { keylessAccount } = usePhysicsFlowerWallet();
   const [address, setAddress] = useState('');
   const [amount, setAmount] = useState('');
 
-  useEffect(() => {
-  }, []);
-
   const handleTransfer = async () => {
-    // try {
-    //   await changeNetwork(Network.DEVNET);
-    // } catch (err) {
-    //   console.error('Failed to change network', err);
-    //   alert('Failed to change network');
-    //   return;
-    // }
-
-    if (!account) {
+    if (!keylessAccount) {
       alert('Please connect your wallet first.');
       return;
     }
@@ -50,18 +38,20 @@ export function TransferDialog({ isOpen, onClose }: TransferDialogProps) {
 
     try {
       // 簽署並提交交易
-      const response = await signAndSubmitTransaction({
-        sender: account.address,
+      const transaction = await aptos.transaction.build.simple({
+        sender: keylessAccount.accountAddress,
         data: {
           function: '0x4422cae46aea5e7654b84f3e81a4013a4767113c3addc8be7cf8e55ef1eb2321::usdk::transfer',
           typeArguments: [],
-          functionArguments: [address, transferAmount.toString()], // 假設 amount 是以小數表示，乘以 1e8 轉換為最小單位
+          functionArguments: [address, transferAmount.toString()],
         }
       });
-      // 等待交易完成
-      // let result = await aptos.waitForTransaction(response.hash);
+      const response = await aptos.signAndSubmitTransaction({ signer: keylessAccount, transaction: transaction });
+
+      let result = await aptos.waitForTransaction({ transactionHash: response.hash });
       alert(`Transaction submitted: ${response.hash}`);
-      alert(`Transferring ${amount} tokens to ${address} from ${account.address}`);
+      alert(`Transferring ${amount} tokens to ${address} from ${keylessAccount.accountAddress.toString()}`);
+
     } catch (error) {
       console.error('Transaction failed', error);
       alert('Transaction failed');

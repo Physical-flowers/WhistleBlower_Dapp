@@ -12,6 +12,8 @@ const UploadForm: React.FC = () => {
   const [walletAddress, setWalletAddress] = useState('');
   const [secretKey, setSecretKey] = useState<string | null>(null);
   const [cid, setCid] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [resultMessage, setResultMessage] = useState<string | null>(null);
   const { account } = useWallet();
 
   useEffect(() => {
@@ -30,6 +32,30 @@ const UploadForm: React.FC = () => {
     setEmail(e.target.value);
   };
 
+  const sendToBackend = async (email: string, url: string, cid: string, secretKey: string, walletAddress: string) => {
+    const baseUrl = process.env.NEXT_PUBLIC_PYTHON_BACKEND_API_URL; // 從環境變數中讀取後端的 base url
+    console.log("Python backend baseUrl: ", baseUrl)
+    const data = {
+      email,
+      url,  // 使用生成的 URL
+      decryption_key: secretKey,
+      ipfs_cid: cid,
+      deposit_amount: '100 USD', // 假設固定金額，或可以從其他地方獲取
+      description: 'Please click the link to verify your account.',
+      wallet_address: walletAddress  // 傳遞錢包地址
+    };
+
+    try {
+      const response = await axios.post(`${baseUrl}/send-mail`, data);
+      return response.data.message;
+    } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        return error.response.data.error;
+      }
+      return 'An error occurred';
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!walletAddress) {
@@ -45,17 +71,24 @@ const UploadForm: React.FC = () => {
       return;
     }
 
+    setLoading(true);
+    setResultMessage(null);
+
     try {
       const secretKey = uuidv4();
       setSecretKey(secretKey);
       const encryptedFile = await encryptFile(pdfFile, secretKey);
       const cid = await uploadToIPFS(encryptedFile);
       setCid(cid);
-      // await sendToSmartContract(cid, secretKey, walletAddress); // 預留
-      alert(`File uploaded successfully. Decryption Key: ${secretKey}, CID: ${cid}`);
+      const token = uuidv4();
+      const url = `http://localhost:3000/verify?token=${token}`;  // 生成包含 Token 的 URL
+      const result = await sendToBackend(email, url, cid, secretKey, walletAddress);
+      setResultMessage(result);
     } catch (error) {
       console.error('Error during upload:', error);
-      alert('An error occurred');
+      setResultMessage('An error occurred');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -92,6 +125,18 @@ const UploadForm: React.FC = () => {
           Submit
         </button>
       </form>
+      {loading && (
+        <div className="mt-4">
+          <p>Sending email, please wait...</p>
+          <div className="loader">Loading...</div>
+        </div>
+      )}
+      {resultMessage && (
+        <div className="mt-4 p-4 bg-gray-100 rounded-md">
+          <h3 className="text-lg font-semibold">Result:</h3>
+          <p>{resultMessage}</p>
+        </div>
+      )}
       {secretKey && (
         <div className="mt-4 p-4 bg-gray-100 rounded-md">
           <h3 className="text-lg font-semibold">Decryption Key:</h3>
