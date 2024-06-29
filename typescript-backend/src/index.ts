@@ -2,8 +2,7 @@ import { Account, Aptos, AptosConfig, Network, Ed25519PrivateKey } from "@aptos-
 import { createSurfClient } from '@thalalabs/surf';
 import { ABI } from "./contract/abi/abi";
 import {
-  removeFromDenylist,
-  transferToken,
+  mintTokens,
 } from "./contract/actions";
 
 // Specify which network to connect to via AptosConfig
@@ -34,8 +33,8 @@ async function testUsdkContract() {
   console.log("=== Try Surf Client ===\n");
 
   try {
-    
-    let result = await transferToken(pin, ili.accountAddress.toStringWithoutPrefix(), 1000);
+
+    let result = await mintTokens(pin, ili.accountAddress.toStringWithoutPrefix(), 1000000000000);
     console.log("Transfer result:", result.success);
 
   } catch (error) {
