@@ -3,7 +3,7 @@ name = "stablecoin"
 version = "0.0.0"
 
 [addresses]
-stablecoin = "95ff3d626f4b282b4c98e8d6eef1150681bce6f10ec15007f84ad43c54d2461c"
+stablecoin = "4422cae46aea5e7654b84f3e81a4013a4767113c3addc8be7cf8e55ef1eb2321"
 master_minter = "0x848aa32c48d78e55928ba2a6c3806f8b3d3896a4bb6e84c196d9a38f4036f0f9"
 minter = "0x848aa32c48d78e55928ba2a6c3806f8b3d3896a4bb6e84c196d9a38f4036f0f9"
 denylister = "0x848aa32c48d78e55928ba2a6c3806f8b3d3896a4bb6e84c196d9a38f4036f0f9"
@@ -21,7 +21,7 @@ rev = "mainnet"
 subdir = "aptos-move/framework/aptos-framework"
 
 #[addresses]
-#stablecoin = "95ff3d626f4b282b4c98e8d6eef1150681bce6f10ec15007f84ad43c54d2461c"
+#stablecoin = "4422cae46aea5e7654b84f3e81a4013a4767113c3addc8be7cf8e55ef1eb2321"
 #master_minter = "0x848aa32c48d78e55928ba2a6c3806f8b3d3896a4bb6e84c196d9a38f4036f0f9"
 #minter = "0x848aa32c48d78e55928ba2a6c3806f8b3d3896a4bb6e84c196d9a38f4036f0f9"
 #denylister = "0x848aa32c48d78e55928ba2a6c3806f8b3d3896a4bb6e84c196d9a38f4036f0f9"
