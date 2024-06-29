@@ -3,15 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -H 0.0.0.0 -p 3000",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@aptos-labs/wallet-adapter-ant-design": "^2.4.11",
-    "@aptos-labs/wallet-adapter-react": "^3.3.0",
-    "@martianwallet/aptos-wallet-adapter": "^0.0.5",
+    "@aptos-labs/ts-sdk": "^1.18.1",
+    "@aptos-labs/wallet-adapter-react": "^3.4.2",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-checkbox": "^1.0.4",

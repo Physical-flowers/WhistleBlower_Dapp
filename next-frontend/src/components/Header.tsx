@@ -1,6 +1,7 @@
 // components/Header.tsx
 import React from 'react';
 import { WalletSelector } from "./WalletSelector";
+import { TransferTokenButton } from './TransferTokenButton';
 
 export function Header({ toggleSidebar }: { toggleSidebar: () => void }) {
   return (
@@ -20,7 +21,8 @@ export function Header({ toggleSidebar }: { toggleSidebar: () => void }) {
         <h1 className="text-xl font-bold ml-4 whitespace-nowrap"><a href="/">WhistleBlower</a></h1>
       </div>
       <div className="flex-1"></div>
-      <div className="flex-shrink-0">
+      <div className="flex-shrink-0 flex gap-4">
+        <TransferTokenButton />
         <WalletSelector />
       </div>
     </header>
