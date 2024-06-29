@@ -157,6 +157,37 @@ module stablecoin::usdk {
         );
     }
 
+    public entry fun transfer(
+        from: &signer,
+        to: address,
+        amount: u64,
+    ) acquires Management, State {
+        // Ensure the account is not denylisted
+        assert_not_denylisted(signer::address_of(from));
+        assert_not_denylisted(to);
+
+        // Ensure the contract is not paused
+        assert_not_paused();
+
+        // Get the metadata object
+        let metadata_object = metadata();
+
+        // Get the primary wallets of both the sender and receiver
+        let from_addr = signer::address_of(from);
+        let from_wallet = primary_fungible_store::primary_store(from_addr, metadata_object);
+        let to_wallet = primary_fungible_store::ensure_primary_store_exists(to, metadata_object);
+
+        // Get the management resource which contains the transfer reference
+        let management = borrow_global<Management>(usdk_address());
+
+        // Perform the withdrawal operation
+        let tokens = withdraw(from_wallet, amount, &management.transfer_ref);
+
+        // Perform the deposit operation
+        deposit(to_wallet, tokens, &management.transfer_ref);
+    }
+
+
     /// Allow a spender to transfer tokens from the owner's account given their signed approval.
     /// Caller needs to provide the from account's scheme and public key which can be gotten via the Aptos SDK.
     public fun transfer_from(
