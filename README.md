@@ -4,6 +4,10 @@
 
 Whistle Blower 是一個去中心化應用（Dapp），旨在提供用戶向報社及主管機關匿名舉報並領取報酬的功能，在此應用中，所有資料皆在客戶端進行加解密，因此沒有任何第三方機構(包含應用提供方)可以存取、串改、阻擋舉報者所傳遞之訊息，所有舉報紀錄皆會被鑄造成 NFT 並於區塊鏈上留下紀錄(詳細內容只有接授舉報方有權瀏覽)，在保障舉報者權益的同時，降低被吃案的可能性。此專案結合了前端、後端以及區塊鏈智能合約來實現完整的匿名舉報流程。
 
+更詳細介紹以及 Data flow 請見:
+- [Pitch 簡報](https://www.canva.com/design/DAGJNzpgac4/-lWnr2_bVHmX3Lf-EsgJvw/view?utm_content=DAGJNzpgac4&utm_campaign=designshare&utm_medium=link&utm_source=editor)
+- [Demo](https://www.youtube.com/watch?v=bmQuFdNiaA0)
+
 我們提供了兩種語言版本的說明：
 - [繁體中文](#繁體中文)
 - [English](#English)
