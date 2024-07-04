@@ -6,6 +6,7 @@ Whisper Guard 是一個去中心化應用（Dapp），旨在提供用戶向報�
 
 更詳細介紹以及 Data flow 請見:
 - [Pitch 簡報 (新增QA的部分)](https://www.canva.com/design/DAGJNzpgac4/-lWnr2_bVHmX3Lf-EsgJvw/view?utm_content=DAGJNzpgac4&utm_campaign=designshare&utm_medium=link&utm_source=editor)
+- [Pitch 影片](https://drive.google.com/drive/folders/1rQzUMexXlYrBmRljRoR4L2VRAsPPJ0DK?usp=drive_link)
 
 Demo 影片
 - [Demo](https://www.youtube.com/watch?v=bmQuFdNiaA0)
